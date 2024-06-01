@@ -14,7 +14,7 @@ function divide(a, b){
     return a / b;
 };
 
-function operate( n1, n2, op){
+function operate( n1, n2, op){ // when dealing with op dont turn it into a float keep it at the +
     if (op === '+')
         {add(n1, n2);}
 
@@ -31,8 +31,8 @@ function operate( n1, n2, op){
 
 }
 
-var a = parseFloat(prompt("Enter a value: ")); // get input from user 
-var b = parseFloat(prompt("Enter another value: "));
+// var a = parseFloat(prompt("Enter a value: ")); // get input from user 
+// var b = parseFloat(prompt("Enter another value: "));
 
 var num1;
 var num2;
@@ -41,7 +41,7 @@ var operator;
 
 
 
-console.log(add(a, b));
-console.log(subtract(a, b));
-console.log(multiply(a, b));
-console.log(divide(a, b));
+// console.log(add(a, b));
+// console.log(subtract(a, b));
+// console.log(multiply(a, b));
+// console.log(divide(a, b));
