@@ -12,10 +12,22 @@ function multiply(a, b){
 
 function divide(a, b){
     return a / b;
-}
+};
 
 function operate( n1, n2, op){
+    if (op === '+')
+        {add(n1, n2);}
 
+    else if (op === '-')
+        {subtract(n1,n2);}
+
+    else if (op === '*')
+        {multiply(n1, n2);}
+
+    else if (op === '/' && n2!= 0)
+        { divide(n1, n2);}
+    else
+    { alert("Not a proper operator.");}
 
 }
 
