@@ -38,6 +38,12 @@ var num1;
 var num2;
 var operator;
 
+const buttons = document.querySelector(".btn dark");
+function display(){
+    var screen = document.querySelector(".screen");
+    screen.innerText = 0;
+}
+
 
 
 
