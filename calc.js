@@ -40,26 +40,56 @@ var num1;
 var num2;
 var operator;
 
+// var nums = []; // need to have 3 max
+
+//1. if its a number then add to array
+//2. if second number is not a operator then dont append it 
+//3. must be a number 
+//4. hit equal run the numbers and the return the thing 
+
+//or 
+
+// 1. if num1 is empty then u can put the number there 
+// to do this catch the value on the screen before the user enters = or any operator 
+//2. if operator empty u can put the operator in there 
+//3. if num 2 empty u can put the operator in there 
+//4. equal sign- call operator on the variables and then after you display the number then empty out the variables 
+//5. when AC called empty out the variables 
+
+
 let buttons = document.querySelectorAll("button");
 
 for (let i of buttons){
     i.addEventListener('click', function(){
         var screen = document.querySelector(".screen");
+        
+        // clear the screen 
         if (i.innerText === "AC"){ 
             screen.innerText = 0; }
-        else if (['+', '-', '*', '/', '=', '%'].includes(i.innerText)){
+
+        // handle operations
+        else if (['+', '-', '*', '/', '%'].includes(i.innerText)){
             screen.innerText = this.innerText;
         }
         
+
+        // handle numbers 
+
+
         // only neg if number
         else if(i.innerText === "+/-"){
             if(!isNaN(parseInt(screen.innerText))){
+        
                 screen.innerText = -(screen.innerText);
             }
         }
 
+        else if(i.innerText=== "."){
+            screen.innerText += ".";
+        }
+
         else if (!isNaN(parseInt(i.innerText))){ // tests if it is a number
-            screen.innerText = this.innerText;}
+            screen.innerText += this.innerText;}
     });
 }
 
