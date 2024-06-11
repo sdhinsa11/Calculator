@@ -18,16 +18,16 @@ function divide(a, b){
 
 function operate( n1, n2, op){ // when dealing with op dont turn it into a float keep it at the +
     if (op === '+')
-        {add(n1, n2);}
+        {return add(n1, n2);}
 
     else if (op === '-')
-        {subtract(n1,n2);}
+        {return subtract(n1,n2);}
 
     else if (op === '*')
-        {multiply(n1, n2);}
+        {return multiply(n1, n2);}
 
     else if (op === '/' && n2!= 0)
-        { divide(n1, n2);}
+        {return divide(n1, n2);}
     else
     { alert("Not a proper operator.");}
 
@@ -36,9 +36,9 @@ function operate( n1, n2, op){ // when dealing with op dont turn it into a float
 // var a = parseFloat(prompt("Enter a value: ")); // get input from user 
 // var b = parseFloat(prompt("Enter another value: "));
 
-var num1;
-var num2;
-var operator;
+var num1 = 0;
+var num2 = 0;
+var operator = NaN;
 
 // var nums = []; // need to have 3 max
 
@@ -65,11 +65,19 @@ for (let i of buttons){
         
         // clear the screen 
         if (i.innerText === "AC"){ 
-            screen.innerText = 0; }
+            screen.innerText = 0;
+            num1 = 0;
+            num2 = 0;
+            operator = NaN;
+         }
 
         // handle operations
         else if (['+', '-', '*', '/', '%'].includes(i.innerText)){
-            screen.innerText = this.innerText;
+            // screen.innerText = this.innerText;
+            num1 = parseFloat(screen.innerText);
+            operator = i.innerText;
+            console.log({num1});
+            console.log({operator});
         }
         
 
@@ -78,8 +86,7 @@ for (let i of buttons){
 
         // only neg if number
         else if(i.innerText === "+/-"){
-            if(!isNaN(parseInt(screen.innerText))){
-        
+            if(!isNaN(parseFloat(screen.innerText))){
                 screen.innerText = -(screen.innerText);
             }
         }
@@ -88,8 +95,25 @@ for (let i of buttons){
             screen.innerText += ".";
         }
 
-        else if (!isNaN(parseInt(i.innerText))){ // tests if it is a number
-            screen.innerText += this.innerText;}
+        else if (!isNaN(parseFloat(i.innerText))){ // tests if it is a number
+            screen.innerText = this.innerText;}
+
+        
+        
+        
+        else if (i.innerText === "=" ){
+            num2 = parseFloat(screen.innerText);
+            console.log({num2});
+            var ans = operate(num1, num2, operator);
+            console.log({ans});
+            
+            
+            screen.innerText = ans;
+            num1 = 0;
+            num2 = 0;
+            operator = NaN;
+        }
+
     });
 }
 
