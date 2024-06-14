@@ -34,7 +34,9 @@ body{
     background-color: rgb(213, 185, 206);;
     border: 3px solid palevioletred;
 
-    font-size: 70px;
+    overflow: hidden;
+    text-overflow: clip;
+    font-size: 55px;
     text-align: right;
 
 }
