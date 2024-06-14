@@ -50,6 +50,7 @@ numlist = [];
 // var reset = false;
 
 var append = false;
+var dec = false;
 
 // var nums = []; // need to have 3 max
 
@@ -88,6 +89,7 @@ for (let i of buttons){
             numlist.push(parseFloat(screen.innerText));
             operatorlist.push(this.innerText);// operator = i.innerText;
             append = false;
+            dec= false;
         }
         
 
@@ -99,7 +101,10 @@ for (let i of buttons){
         }
 
         else if(i.innerText=== "."){
-            screen.innerText += ".";
+            if (!dec){
+                screen.innerText += "."
+                dec = true;
+            }
         }
 
         else if (!isNaN(parseFloat(i.innerText))){ // tests if it is a number
@@ -110,9 +115,6 @@ for (let i of buttons){
             else if (append){   
                 screen.innerText +=this.innerText;
             }
-
-
-            
         }
 
         else if (i.innerText === "=" && ((numlist.length + operatorlist.length)%2 === 0)){
@@ -127,6 +129,7 @@ for (let i of buttons){
             numlist = [];
             operatorlist = [];
             append = false;
+            dec = false;
         }
 
     });

@@ -2,6 +2,7 @@
 body{
     display:flex;
     font-family:monospace;
+    background-color: cadetblue
 }
 
 .main{
