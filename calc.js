@@ -38,13 +38,18 @@ function operate( n1, n2, op){ // when dealing with op dont turn it into a float
 
 
 // handle multiple numbers use a list - tmrw 
-var num1 = 0;
-var num2 = 0;
-var operator = NaN;
+// var num1 = 0;
+// var num2 = 0;
+// var operator = NaN;
 
-var prev = false;
-var clearDisplay = false;
-var reset = false;
+operatorlist = [];
+numlist = [];
+
+// var prev = false;
+// var clearDisplay = false;
+// var reset = false;
+
+var append = false;
 
 // var nums = []; // need to have 3 max
 
@@ -72,27 +77,22 @@ for (let i of buttons){
         // clear the screen 
         if (i.innerText === "AC"){ 
             screen.innerText = 0;
-            num1 = 0; // numlist == 0
-            num2 = 0; // operatolist == 0
-            operator = NaN;
+            numlist = [] // num1 = 0;
+            operatorlist = [] // num2 = 0; 
+            // operator = NaN;
          }
 
         // handle operations
         else if (['+', '-', '*', '/', '%'].includes(i.innerText)){
             // screen.innerText = this.innerText;
-            num1 = parseFloat(screen.innerText);
-            operator = i.innerText;
-            console.log({num1});
-            console.log({operator});
-            clearDisplay = true;
+            numlist.push(parseFloat(screen.innerText));
+            operatorlist.push(this.innerText);// operator = i.innerText;
+            append = false;
         }
         
 
         // handle numbers 
-
-
-        // only neg if number
-        else if(i.innerText === "+/-"){
+        else if(i.innerText === "+/-"){ // only neg if number
             if(!isNaN(parseFloat(screen.innerText))){
                 screen.innerText = -(screen.innerText);
             }
@@ -103,45 +103,30 @@ for (let i of buttons){
         }
 
         else if (!isNaN(parseFloat(i.innerText))){ // tests if it is a number
-            if (parseFloat(screen.innerText) === 0 && screen.innerText != "0.") // checks if its not 0 at beginning 
-                {screen.innerText = this.innerText;
-                    // console.log("0 works!");
-                }
+            if (numlist.length === operatorlist.length  && !append){ 
+                screen.innerText = this.innerText;
+                append = true;
+            } 
+            else if (append){   
+                screen.innerText +=this.innerText;
+            }
 
-            else if (!reset) // after one round of calculation, so you can keep calculating
-                { screen.innerText = this.innerText;
-                    reset = true;}
-
-            else if (clearDisplay && num1 && !num2) // allows second number to not be concatenated when hit first, !num2 shows that the number is empty 
-                {   screen.innerText = this.innerText;
-                    prev = true; // so that it can start concatenating from this
-                    // console.log("handling num2 works!");
-                    clearDisplay = false;
-                }
-            else if (prev && !clearDisplay) // once num2 has one nunber then the sequential numbers can get concatenated
-                { screen.innerText += this.innerText; }
 
             
-            else if (!clearDisplay && !num2 && reset) // signasl you can press buttons for num 1
-                {screen.innerText += this.innerText;
-                    // console.log("handling number 1 works!");
-                }
         }
 
-        else if (i.innerText === "=" ){
-            num2 = parseFloat(screen.innerText);
-            console.log({num2});
-            var ans = operate(num1, num2, operator);
-            console.log({ans});
-            
-            
+        else if (i.innerText === "=" && ((numlist.length + operatorlist.length)%2 === 0)){
+            numlist.push(parseFloat(screen.innerText));
+
+            //for loop
+            var ans = numlist[0];
+            for(let i = 0; i<operatorlist.length;i++){
+                var ans = operate(ans,numlist[i+1],operatorlist[i])
+            }
             screen.innerText = ans;
-            num1 = 0;
-            num2 = 0;
-            operator = NaN;
-            clearDisplay = false;
-            prev = false;
-            reset = false;
+            numlist = [];
+            operatorlist = [];
+            append = false;
         }
 
     });
