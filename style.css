@@ -5,6 +5,12 @@ body{
     background-color: cadetblue
 }
 
+.header{
+    width: 100px;
+    height: 30px;
+    background-color: aliceblue;
+}
+
 .main{
     /* styles and seperates the screen from the bottom  */
     display: flex;
